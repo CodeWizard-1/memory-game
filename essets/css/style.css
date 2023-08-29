@@ -6,8 +6,9 @@
 }
 
 body {
-    background: url('/essets/images/oceansubsurface.svg') no-repeat center center/cover;
+    background: url('../images/background.svg') no-repeat center center/cover;
 }
+
 
 .wrapper {
     height: 100vh;
