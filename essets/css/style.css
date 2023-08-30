@@ -30,8 +30,8 @@
     height: calc(25% - 10px);
     transform: scale(1);
     margin: 5px;
-    background: black;
-    transform: transform 0.5s;
+    position: relative;
+    transition: transform 0.5s;
     transform-style: preserve-3d;
 }
 
@@ -41,7 +41,7 @@
 
 .memory-card:active {
     transform: scale(0.97);
-    transform: transform 0.2s;
+    transition: transform 0.2s;
 }
 
 .front-face, .back-face {
