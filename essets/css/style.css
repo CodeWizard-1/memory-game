@@ -49,9 +49,10 @@
     height: 100%;
     padding: 10px;
     position: absolute;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     background-color: #1c92d2;
     backface-visibility: hidden;
+    box-shadow: 20px 20px 20px rgb(8, 16, 115);
 }
 
 .front-face {
