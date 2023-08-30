@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
 /* Asterisk wildcard selector to override default styles added by the browser */
 * {
     padding: 0;
@@ -8,7 +9,7 @@
 
 body {
     background: url('../images/background.svg') no-repeat center center/cover;
-
+    
 }
 
 .wrapper {
@@ -23,19 +24,25 @@ body {
 
 
 .header h1{
-    font-size: 00%rem;
+    font-size: 370%;
     text-align: center;
-    color: red;
+    color: rgb(255, 0, 60);
+    text-shadow: 5px 5px 5px rgb(8, 16, 115);
+    font-family: 'Cherry Bomb One', cursive;
+    letter-spacing: 0.3em;
+
+
 }
 
 .memory-game {
     width: 650px;
     height: 650px;
-    margin: auto;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 6px;
     perspective: 1000px;
 }
 
@@ -43,15 +50,20 @@ body {
     width: calc(25% - 10px);
     height: calc(25% - 10px);
     transform: scale(1);
-    margin: 5px;
+    /* margin: 5px; */
     position: relative;
     transition: transform 0.5s;
     transform-style: preserve-3d;
+    cursor: pointer;
 }
 
 .memory-card.flip {
     transform: rotateY(180deg);
 }
+
+/* .memory-card:hover{
+    transform: scale(1.05);
+} */
 
 .memory-card:active {
     transform: scale(0.97);
@@ -66,9 +78,16 @@ body {
     border-radius: 20px;
     background-color: #1c92d2;
     backface-visibility: hidden;
-    box-shadow: 5px 5px 5px rgb(8, 16, 115);
+    box-shadow: 5px 5px 3px rgb(8, 16, 115);
 }
 
 .front-face {
     transform: rotateY(180deg);
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

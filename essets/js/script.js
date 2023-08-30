@@ -1,8 +1,34 @@
 const cards = document.querySelectorAll(".memory-card");
+const timeValue = document.getElementById("time");
+const startButton = document.getElementById("start");
+const stopButton = document.getElementById("stop");
+const gameContainer = document.querySelector(".game-container");
+const result = document.getElementById("result");
+const controls = document.querySelector(".control-container")
+
+
+ 
 
 let hasFlippedCard = false;
 let boardLocked = false;
 let firstCard, secondCard;
+
+let second = 0,
+  minute = 0;
+
+  const timeGenerator = () => {
+    second += 1;
+
+    if(second>=60) {
+        minute += 1;
+        second = 0;
+    }
+  };
+
+// let secondsValue = second < 10 ? `0${seconds}` : seconds;
+// let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+// timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+
 
 const flipCard = e => {
     if (boardLocked) return;
