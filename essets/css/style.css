@@ -3,16 +3,29 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
+body {
+    background: url('../images/background.svg') no-repeat center center/cover;
+
+}
 
 .wrapper {
     height: 100vh;
-    display: flex;
-    /* background: #1c92d2;  /* fallback for old browsers */
-    /* background: -webkit-linear-gradient(to right, #f2fcfe, #1c92d2);  Chrome 10-25, Safari 5.1-6 */
-    /* background: linear-gradient(to right, #f2fcfe, #1c92d2); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
-    background: url('../images/background.svg') no-repeat center center/cover;
+    display: flex; 
+    flex-direction: column;   
+}
+
+.header {
+    margin: 10px auto;
+}
+
+
+.header h1{
+    font-size: 00%rem;
+    text-align: center;
+    color: red;
 }
 
 .memory-game {
@@ -20,7 +33,8 @@
     height: 650px;
     margin: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
     flex-wrap: wrap;
     perspective: 1000px;
 }
@@ -49,10 +63,10 @@
     height: 100%;
     padding: 10px;
     position: absolute;
-    /* border-radius: 20px; */
+    border-radius: 20px;
     background-color: #1c92d2;
     backface-visibility: hidden;
-    box-shadow: 20px 20px 20px rgb(8, 16, 115);
+    box-shadow: 5px 5px 5px rgb(8, 16, 115);
 }
 
 .front-face {
