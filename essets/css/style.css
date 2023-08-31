@@ -87,15 +87,16 @@ body {
     transform: rotateY(180deg);
 }
 
-.start-container {
+.stats-container {
   text-align: right;
   margin-bottom: 1.2em;
 
 }
 
-.start-container span {
+.stats-container span {
   font-weight: 600;
 }
+
 .controls-container {
     position: absolute;
     display: flex;

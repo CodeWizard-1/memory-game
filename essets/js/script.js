@@ -40,12 +40,9 @@ timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
 
 //For calculating moves
 const movesConter = () => {
-    movesCount +=1;
-
-
-}
-
-
+    movesCount += 1;
+    moves.innerHTML = `<span>Moves:</span>${movesCount}`;
+};
 
 
 const flipCard = e => {
@@ -61,6 +58,11 @@ const flipCard = e => {
 
         hasFlippedCard = true;
         firstCard = target;
+        winCount += 1;
+        if (winCount == Math.floor(cards.length/2)){
+            result.innerHTML = `<h2>You Won</h2><h4>Moves: ${movesConter}</h4>`;
+            stopGame();
+        }
     } else {
 
         hasFlippedCard = false;
@@ -108,15 +110,32 @@ cards.forEach(card => {
     card.style.order = randomIndex;
 });
 
-startButton.addEventListener("click", () => {
-    second = 0;
-    minute = 0;
 
+//Initialiaze values and func calls
+const initialiazer = () => {
+    result.innerText = "";
+    winCount = 0;
+    // let flipCard = isEqual();
+    // console.log(flipCard);
+};
+
+//Start game
+
+startButton.addEventListener("click", () => {
+    movesCount = 0;
+    time = 0;
+    seconds = 0;
+    minutes = 0;
+//controls and buttons visibility
     controls.classList.add("hide");
     stopButton.classList.remove("hide");
     startButton.classList.add("hide");
-
+//Start timer
     interval = setInterval(timeGenerator, 1000);
+
+//initial moves
+    moves.innerHTML = `<span>Moves:</span> ${movesCont}`;
+
     initialiazer();
 
 });
@@ -127,6 +146,6 @@ stopButton.addEventListener("click", (stopGame = () => {
     stopButton.classList.add("hide");
     startButton.classList.remove("hide");
     clearInterval(interval);
-})
+  })
 );
 
