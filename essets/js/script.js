@@ -1,104 +1,100 @@
 const cards = document.querySelectorAll(".memory-card");
-const timeValue = document.getElementById("time");
-const startButton = document.getElementById("start");
-const stopButton = document.getElementById("stop");
-const gameContainer = document.querySelector(".game-container");
-const result = document.getElementById("result");
-const controls = document.querySelector(".control-container")
+// const timeValue = document.getElementById("time");
+// const startButton = document.getElementById("start");
+// const stopButton = document.getElementById("stop");
+// const gameContainer = document.querySelector(".game-container");
+// const result = document.getElementById("result");
+// const controls = document.querySelector(".control-container")
 
 
-let interval;
+// let interval;
 
 let hasFlippedCard = false;
 let boardLocked = false;
 let firstCard, secondCard;
 
 
-//Initial time
-let seconds = 0,
-    minutes = 0;
+// //Initial time
+// let seconds = 0,
+//     minutes = 0;
 
-//Initial moves and win count
-let movesCount = 0,
-    winCount = 0;
+// //Initial moves and win count
+// let movesCount = 0,
+//     winCount = 0;
 
 
 // For timer
-const timeGenerator = () => {
-    seconds += 1;
-     //minute logic
-    if (seconds >= 60) {
-        minutes += 1;
-        seconds = 0;
-    }
-    //format time before displaying
+// const timeGenerator = () => {
+//     seconds += 1;
+//      //minute logic
+//     if (seconds >= 60) {
+//         minutes += 1;
+//         seconds = 0;
+//     }
+//     //format time before displaying
 
-let secondsValue = seconds < 10 ? `0${seconds}` :seconds;
-let minutesValue = minutes < 10 ? `0${minutes}` :minutes;
-timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-};
+// let secondsValue = seconds < 10 ? `0${seconds}` :seconds;
+// let minutesValue = minutes < 10 ? `0${minutes}` :minutes;
+// timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+// };
 
-//For calculating moves
-const movesConter = () => {
-    movesCount += 1;
-    moves.innerHTML = `<span>Moves:</span>${movesCount}`;
-};
+// //For calculating moves
+// const movesConter = () => {
+//     movesCount += 1;
+//     moves.innerHTML = `<span>Moves:</span>${movesCount}`;
+// };
 
 
-const flipCard = e => {
+function flipCard () {
     if (boardLocked) return;
+    if (this === firstCard) return;
 
-    const target = e.target.parentElement;
-
-    if (target === firstCard) return;
-
-    target.classList.add("flip");
+    this.classList.add("flip");
 
     if (!hasFlippedCard) {
 
         hasFlippedCard = true;
-        firstCard = target;
+        firstCard = this;
+        return;
         winCount += 1;
-        if (winCount == Math.floor(cards.length/2)){
-            result.innerHTML = `<h2>You Won</h2><h4>Moves: ${movesConter}</h4>`;
-            stopGame();
-        }
-    } else {
-
-        hasFlippedCard = false;
-        secondCard = target;
-
-        checkForMatch();
+        // if (winCount == Math.floor(cards.length/2)){
+        //     result.innerHTML = `<h2>You Won</h2><h4>Moves: ${movesConter}</h4>`;
+        //     stopGame();
     }
-};
 
-const checkForMatch = () => {
-    const isEqual = firstCard.dataset.framework === secondCard.dataset.framework;
+    secondCard = this;
+    boardLocked = true;
 
-    isEqual ? disableCards() : unflipCards();
-};
+    checkForMatch();
+    }
 
-function disableCards() {
+    function checkForMatch () {
+    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+    isMatch ? disableCards() : unflipCards();
+    }
+
+    function disableCards() {
 
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
-}
 
-const unflipCards = () => {
-    boardLocked = true;
+    resetBoard();
+    }
 
-    setTimeout(() => {
+    function unflipCards  () {
+        setTimeout(() => {
         firstCard.classList.remove("flip");
         secondCard.classList.remove("flip");
 
         resetBoard();
     }, 1000);
-};
+   }
 
-const resetBoard = () => {
-    hasFlippedCard = boardLocked = false;
-    firstCard = secondCard = null;
-};
+    function resetBoard () {
+    [hasFlippedCard, boardLocked] = [false,false];
+    [firstCard, secondCard] = [null, null];
+    }
 
 
 cards.forEach(card => {
@@ -115,15 +111,13 @@ cards.forEach(card => {
 const initialiazer = () => {
     result.innerText = "";
     winCount = 0;
-    // let flipCard = isEqual();
-    // console.log(flipCard);
+    let flipCard = randomIndex();
+    console.log(flipCard);
 };
 
 //Start game
-
 startButton.addEventListener("click", () => {
     movesCount = 0;
-    time = 0;
     seconds = 0;
     minutes = 0;
 //controls and buttons visibility
