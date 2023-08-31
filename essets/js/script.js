@@ -1,8 +1,31 @@
 const cards = document.querySelectorAll(".memory-card");
+const timerDisplay = document.getElementById("timer");
 
 let hasFlippedCard = false;
 let boardLocked = false;
 let firstCard, secondCard;
+
+let startTime;
+let endTime;
+let timerInterval;
+
+function startTimer() {
+    startTime = new Date().getTime();
+    timerInterval = setInterval(updateTimer, 10); // Обновляем каждые 10 миллисекунд
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function updateTimer() {
+    const currentTime = new Date().getTime();
+    const elapsedTime = currentTime - startTime;
+    const milliseconds = elapsedTime % 1000;
+    const seconds = Math.floor(elapsedTime / 1000) % 60;
+    const minutes = Math.floor(elapsedTime / 1000 / 60);
+    timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
+}
 
 function flipCard() {
     if (boardLocked) return;
@@ -11,21 +34,13 @@ function flipCard() {
     this.classList.add("flip");
 
     if (!hasFlippedCard) {
-
         hasFlippedCard = true;
         firstCard = this;
+        startTimer();
         return;
     }
-
     secondCard = this;
-
-
     checkForMatch();
-
-    if (document.querySelectorAll(".memory-card").length == document.querySelectorAll(".memory-card.flip").length) {
-        console.log("Game Over");
-        document.querySelectorAll(".memory-card.flip").forEach(c => c.classList.remove("flip"));
-    }
 }
 
 function checkForMatch() {
@@ -35,7 +50,6 @@ function checkForMatch() {
 }
 
 function disableCards() {
-
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
 
@@ -50,58 +64,39 @@ function unflipCards() {
         secondCard.classList.remove("flip");
 
         resetBoard();
-    }, 1000);
+    }, 500);
 }
 
 function resetBoard() {
     [hasFlippedCard, boardLocked] = [false, false];
     [firstCard, secondCard] = [null, null];
+
+    const flippedCards = document.querySelectorAll(".memory-card.flip");
+
+    if (flippedCards.length === cards.length) {
+        console.log("Game Over");
+        endTime = new Date().getTime();
+        stopTimer();
+        showGameTime();
+    }
 }
 
+function showGameTime() {
+    const elapsedTime = endTime - startTime;
+    const milliseconds = elapsedTime % 1000;
+    const seconds = Math.floor(elapsedTime / 1000) % 60;
+    const minutes = Math.floor(elapsedTime / 1000 / 60);
+
+    const gameTimeDisplay = document.createElement("div");
+    gameTimeDisplay.classList.add("game-time");
+    gameTimeDisplay.textContent = `Твое время: ${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
+
+    document.body.appendChild(gameTimeDisplay);
+}
 
 cards.forEach(card => {
-
-    // Add Event Listener to every card
     card.addEventListener("click", flipCard);
 
     const randomIndex = Math.floor(Math.random() * cards.length);
     card.style.order = randomIndex;
 });
-
-
-// //Initialiaze values and func calls
-// const initialiazer = () => {
-//     result.innerText = "";
-//     winCount = 0;
-//     let flipCard = randomIndex();
-//     console.log(flipCard);
-// };
-
-// //Start game
-// startButton.addEventListener("click", () => {
-//     movesCount = 0;
-//     seconds = 0;
-//     minutes = 0;
-// //controls and buttons visibility
-//     controls.classList.add("hide");
-//     stopButton.classList.remove("hide");
-//     startButton.classList.add("hide");
-// //Start timer
-//     interval = setInterval(timeGenerator, 1000);
-
-// //initial moves
-//     moves.innerHTML = `<span>Moves:</span> ${movesCont}`;
-
-//     initialiazer();
-
-// });
-
-// //Stop game
-// stopButton.addEventListener("click", (stopGame = () => {
-//     controls.classList.remove("hide");
-//     stopButton.classList.add("hide");
-//     startButton.classList.remove("hide");
-//     clearInterval(interval);
-//   })
-// );
-
