@@ -7,27 +7,45 @@ const result = document.getElementById("result");
 const controls = document.querySelector(".control-container")
 
 
- 
+let interval;
 
 let hasFlippedCard = false;
 let boardLocked = false;
 let firstCard, secondCard;
 
-let second = 0,
-  minute = 0;
 
-  const timeGenerator = () => {
-    second += 1;
+//Initial time
+let seconds = 0,
+    minutes = 0;
 
-    if(second>=60) {
-        minute += 1;
-        second = 0;
+//Initial moves and win count
+let movesCount = 0,
+    winCount = 0;
+
+
+// For timer
+const timeGenerator = () => {
+    seconds += 1;
+     //minute logic
+    if (seconds >= 60) {
+        minutes += 1;
+        seconds = 0;
     }
-  };
+    //format time before displaying
 
-let secondsValue = second < 10 ? `0${seconds}` : seconds;
-let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+let secondsValue = seconds < 10 ? `0${seconds}` :seconds;
+let minutesValue = minutes < 10 ? `0${minutes}` :minutes;
 timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+};
+
+//For calculating moves
+const movesConter = () => {
+    movesCount +=1;
+
+
+}
+
+
 
 
 const flipCard = e => {
@@ -43,7 +61,7 @@ const flipCard = e => {
 
         hasFlippedCard = true;
         firstCard = target;
-    }else {
+    } else {
 
         hasFlippedCard = false;
         secondCard = target;
@@ -65,14 +83,14 @@ function disableCards() {
 }
 
 const unflipCards = () => {
-      boardLocked = true;
+    boardLocked = true;
 
-      setTimeout (() => {
+    setTimeout(() => {
         firstCard.classList.remove("flip");
         secondCard.classList.remove("flip");
 
         resetBoard();
-        }, 1000);
+    }, 1000);
 };
 
 const resetBoard = () => {
@@ -88,4 +106,27 @@ cards.forEach(card => {
 
     const randomIndex = Math.floor(Math.random() * cards.length);
     card.style.order = randomIndex;
-}); 
+});
+
+startButton.addEventListener("click", () => {
+    second = 0;
+    minute = 0;
+
+    controls.classList.add("hide");
+    stopButton.classList.remove("hide");
+    startButton.classList.add("hide");
+
+    interval = setInterval(timeGenerator, 1000);
+    initialiazer();
+
+});
+
+//Stop game
+stopButton.addEventListener("click", (stopGame = () => {
+    controls.classList.remove("hide");
+    stopButton.classList.add("hide");
+    startButton.classList.remove("hide");
+    clearInterval(interval);
+})
+);
+
