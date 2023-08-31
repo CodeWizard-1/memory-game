@@ -36,9 +36,9 @@ body {
 }
 
 .memory-game {
-    width: 650px;
-    height: 650px;
-    margin: 10px auto;
+    width: 600px;
+    height: 600px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,6 +62,9 @@ body {
     transform: rotateY(180deg);
 }
 
+.flip {
+  border: 1px solid black;
+}
 /* .memory-card:hover{
     transform: scale(1.05);
 } */

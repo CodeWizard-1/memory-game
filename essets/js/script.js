@@ -1,51 +1,10 @@
 const cards = document.querySelectorAll(".memory-card");
-// const timeValue = document.getElementById("time");
-// const startButton = document.getElementById("start");
-// const stopButton = document.getElementById("stop");
-// const gameContainer = document.querySelector(".game-container");
-// const result = document.getElementById("result");
-// const controls = document.querySelector(".control-container")
-
-
-// let interval;
 
 let hasFlippedCard = false;
 let boardLocked = false;
 let firstCard, secondCard;
 
-
-// //Initial time
-// let seconds = 0,
-//     minutes = 0;
-
-// //Initial moves and win count
-// let movesCount = 0,
-//     winCount = 0;
-
-
-// For timer
-// const timeGenerator = () => {
-//     seconds += 1;
-//      //minute logic
-//     if (seconds >= 60) {
-//         minutes += 1;
-//         seconds = 0;
-//     }
-//     //format time before displaying
-
-// let secondsValue = seconds < 10 ? `0${seconds}` :seconds;
-// let minutesValue = minutes < 10 ? `0${minutes}` :minutes;
-// timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-// };
-
-// //For calculating moves
-// const movesConter = () => {
-//     movesCount += 1;
-//     moves.innerHTML = `<span>Moves:</span>${movesCount}`;
-// };
-
-
-function flipCard () {
+function flipCard() {
     if (boardLocked) return;
     if (this === firstCard) return;
 
@@ -56,45 +15,48 @@ function flipCard () {
         hasFlippedCard = true;
         firstCard = this;
         return;
-        winCount += 1;
-        // if (winCount == Math.floor(cards.length/2)){
-        //     result.innerHTML = `<h2>You Won</h2><h4>Moves: ${movesConter}</h4>`;
-        //     stopGame();
     }
 
     secondCard = this;
-    boardLocked = true;
+
 
     checkForMatch();
-    }
 
-    function checkForMatch () {
+    if (document.querySelectorAll(".memory-card").length == document.querySelectorAll(".memory-card.flip").length) {
+        console.log("Game Over");
+        document.querySelectorAll(".memory-card.flip").forEach(c => c.classList.remove("flip"));
+    }
+}
+
+function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
     isMatch ? disableCards() : unflipCards();
-    }
+}
 
-    function disableCards() {
+function disableCards() {
 
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
 
     resetBoard();
-    }
+}
 
-    function unflipCards  () {
-        setTimeout(() => {
+function unflipCards() {
+    boardLocked = true;
+
+    setTimeout(() => {
         firstCard.classList.remove("flip");
         secondCard.classList.remove("flip");
 
         resetBoard();
     }, 1000);
-   }
+}
 
-    function resetBoard () {
-    [hasFlippedCard, boardLocked] = [false,false];
+function resetBoard() {
+    [hasFlippedCard, boardLocked] = [false, false];
     [firstCard, secondCard] = [null, null];
-    }
+}
 
 
 cards.forEach(card => {
@@ -107,39 +69,39 @@ cards.forEach(card => {
 });
 
 
-//Initialiaze values and func calls
-const initialiazer = () => {
-    result.innerText = "";
-    winCount = 0;
-    let flipCard = randomIndex();
-    console.log(flipCard);
-};
+// //Initialiaze values and func calls
+// const initialiazer = () => {
+//     result.innerText = "";
+//     winCount = 0;
+//     let flipCard = randomIndex();
+//     console.log(flipCard);
+// };
 
-//Start game
-startButton.addEventListener("click", () => {
-    movesCount = 0;
-    seconds = 0;
-    minutes = 0;
-//controls and buttons visibility
-    controls.classList.add("hide");
-    stopButton.classList.remove("hide");
-    startButton.classList.add("hide");
-//Start timer
-    interval = setInterval(timeGenerator, 1000);
+// //Start game
+// startButton.addEventListener("click", () => {
+//     movesCount = 0;
+//     seconds = 0;
+//     minutes = 0;
+// //controls and buttons visibility
+//     controls.classList.add("hide");
+//     stopButton.classList.remove("hide");
+//     startButton.classList.add("hide");
+// //Start timer
+//     interval = setInterval(timeGenerator, 1000);
 
-//initial moves
-    moves.innerHTML = `<span>Moves:</span> ${movesCont}`;
+// //initial moves
+//     moves.innerHTML = `<span>Moves:</span> ${movesCont}`;
 
-    initialiazer();
+//     initialiazer();
 
-});
+// });
 
-//Stop game
-stopButton.addEventListener("click", (stopGame = () => {
-    controls.classList.remove("hide");
-    stopButton.classList.add("hide");
-    startButton.classList.remove("hide");
-    clearInterval(interval);
-  })
-);
+// //Stop game
+// stopButton.addEventListener("click", (stopGame = () => {
+//     controls.classList.remove("hide");
+//     stopButton.classList.add("hide");
+//     startButton.classList.remove("hide");
+//     clearInterval(interval);
+//   })
+// );
 
