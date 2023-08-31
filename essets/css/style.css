@@ -8,9 +8,10 @@
 }
 
 body {
-    background: url('../images/sea-bottom-dark.jpeg') no-repeat center center/cover;
+    background: url('../images/background.svg') no-repeat center center;
+    background-size: 110%;
     height: 100%;
-    margin: 0;
+    /* width: 120vh; */
 }
 
 .wrapper {
@@ -77,7 +78,7 @@ body {
     padding: 10px;
     position: absolute;
     border-radius: 20px;
-    background-color: #befcff;
+    background-color: #5e7bef;
     backface-visibility: hidden;
     box-shadow: 5px 5px 3px rgb(8, 16, 115);
 }

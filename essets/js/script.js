@@ -25,9 +25,9 @@ let second = 0,
     }
   };
 
-// let secondsValue = second < 10 ? `0${seconds}` : seconds;
-// let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
-// timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+let secondsValue = second < 10 ? `0${seconds}` : seconds;
+let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
 
 
 const flipCard = e => {
