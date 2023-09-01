@@ -9,11 +9,13 @@ let startTime;
 let endTime;
 let timerInterval;
 
+const results = [];
+
 function startTimer() {
     if (!timerInterval) {
         startTime = new Date().getTime();
         timerInterval = setInterval(updateTimer, 10);
-    }  
+    }
 }
 function stopTimer() {
     clearInterval(timerInterval);
@@ -52,7 +54,7 @@ function flipCard() {
     }
     secondCard = this;
     checkForMatch();
-    checkForAllCardsOpen();
+    // checkForAllCardsOpen();
 }
 
 function checkForMatch() {
@@ -83,17 +85,7 @@ function resetBoard() {
     [hasFlippedCard, boardLocked] = [false, false];
     [firstCard, secondCard] = [null, null];
 
-    checkForAllCardsOpen(); 
-
-    // const flippedCards = document.querySelectorAll(".memory-card.flip");
-
-    // if (document.querySelectorAll('.memory-card').length == document.querySelectorAll('.memory-card.flip').length) {
-    //     console.log("Game Over");
-    //     // document.querySelectorAll('.memory-card.flip').forEach(c => c.classList.remove('flip'));
-    //     endTime = new Date().getTime();
-    //     stopTimer();
-    //     showGameTime();
-    // }
+    checkForAllCardsOpen();
 
     // boardLocked = false;
 }
@@ -109,12 +101,62 @@ function showGameTime() {
     gameTimeDisplay.textContent = `Твое время: ${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
 
     document.body.appendChild(gameTimeDisplay);
+
+    const playerName = prompt("Inter your name:");
+    const playerTime = `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
+
+    results.push({ name: playerName, time: playerTime });
+
+    results.sort((a, b) => {
+    return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+    });
+
+    updateResultsTable();
 }
 
-function shuffleCards () {
+
+// document.body.appendChild(gameTimeDisplay);
+
+function updateResultsTable() {
+    const tableContainer = document.getElementById("results-table");
+    if (!tableContainer) {
+        // Create the table container if it doesn't exist
+        const newTableContainer = document.createElement("div");
+        newTableContainer.id = "results-table";
+
+        const table = document.createElement("table");
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        `;
+
+        newTableContainer.appendChild(table);
+        document.body.appendChild(newTableContainer);
+    }
+
+    const tableBody = tableContainer.querySelector("tbody");
+    tableBody.innerHTML = "";
+
+    results.forEach((result, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${result.name}</td>
+            <td>${result.time}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+
+function shuffleCards() {
     cards.forEach(card => {
         // card.addEventListener("click", flipCard);
-    
+
         const randomIndex = Math.floor(Math.random() * cards.length);
         card.style.order = randomIndex;
     });
