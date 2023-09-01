@@ -10,10 +10,11 @@ let endTime;
 let timerInterval;
 
 function startTimer() {
-    startTime = new Date().getTime();
-    timerInterval = setInterval(updateTimer, 10); // Обновляем каждые 10 миллисекунд
+    if (!timerInterval) {
+        startTime = new Date().getTime();
+        timerInterval = setInterval(updateTimer, 10);
+    }  
 }
-
 function stopTimer() {
     clearInterval(timerInterval);
 }
@@ -25,6 +26,16 @@ function updateTimer() {
     const seconds = Math.floor(elapsedTime / 1000) % 60;
     const minutes = Math.floor(elapsedTime / 1000 / 60);
     timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
+}
+
+function checkForAllCardsOpen() {
+    const flippedCards = document.querySelectorAll('.memory-card.flip');
+    if (flippedCards.length === cards.length) {
+        console.log("Game Over");
+        endTime = new Date().getTime();
+        stopTimer();
+        showGameTime();
+    }
 }
 
 function flipCard() {
@@ -41,6 +52,7 @@ function flipCard() {
     }
     secondCard = this;
     checkForMatch();
+    checkForAllCardsOpen();
 }
 
 function checkForMatch() {
@@ -64,21 +76,26 @@ function unflipCards() {
         secondCard.classList.remove("flip");
 
         resetBoard();
-    }, 500);
+    }, 1000);
 }
 
 function resetBoard() {
     [hasFlippedCard, boardLocked] = [false, false];
     [firstCard, secondCard] = [null, null];
 
-    const flippedCards = document.querySelectorAll(".memory-card.flip");
+    checkForAllCardsOpen(); 
 
-    if (flippedCards.length === cards.length) {
-        console.log("Game Over");
-        endTime = new Date().getTime();
-        stopTimer();
-        showGameTime();
-    }
+    // const flippedCards = document.querySelectorAll(".memory-card.flip");
+
+    // if (document.querySelectorAll('.memory-card').length == document.querySelectorAll('.memory-card.flip').length) {
+    //     console.log("Game Over");
+    //     // document.querySelectorAll('.memory-card.flip').forEach(c => c.classList.remove('flip'));
+    //     endTime = new Date().getTime();
+    //     stopTimer();
+    //     showGameTime();
+    // }
+
+    // boardLocked = false;
 }
 
 function showGameTime() {
@@ -94,9 +111,17 @@ function showGameTime() {
     document.body.appendChild(gameTimeDisplay);
 }
 
+function shuffleCards () {
+    cards.forEach(card => {
+        // card.addEventListener("click", flipCard);
+    
+        const randomIndex = Math.floor(Math.random() * cards.length);
+        card.style.order = randomIndex;
+    });
+}
+
+shuffleCards();
+
 cards.forEach(card => {
     card.addEventListener("click", flipCard);
-
-    const randomIndex = Math.floor(Math.random() * cards.length);
-    card.style.order = randomIndex;
 });
