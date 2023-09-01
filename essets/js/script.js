@@ -177,7 +177,6 @@ function updateResultsTable() {
         tableBody.appendChild(row);
     });
 
-    // Заменить существующую таблицу обновленной таблицей
     tableContainer.innerHTML = "";
     tableContainer.appendChild(table);
 }
@@ -192,9 +191,46 @@ function shuffleCards() {
         card.style.order = randomIndex;
     });
 
-    // cards.forEach(card => {
-    //     card.addEventListener("click", flipCard);
-    // });
 }
 shuffleCards();
+
+const restartButton = document.getElementById("restart-button");
+
+restartButton.addEventListener("click", () => {
+    resetGame();
+});
+
+function resetGame() {
+    // Сброс всех переменных и состояний игры.
+    stopTimer(); // Остановить таймер (если он работает).
+    resetTimer(); // Сбросить таймер.
+    closeResults(); // Скрыть результаты (если они отображаются).
+    resetCards(); // Сбросить состояние всех карт (закрыть их).
+    shuffleCards(); // Перетасовать карты.
+    openModal(); // Открыть модальное окно начала игры.
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerDisplay.textContent = "0:00:00.000";
+}
+
+function resetCards() {
+    cards.forEach(card => {
+        card.classList.remove("flip");
+        card.addEventListener("click", flipCard);
+    });
+}
+
+function closeResults() {
+    // Закрыть результаты игры или очистить соответствующий контейнер на вашей странице (если он есть).
+    const resultsContainer = document.getElementById("results-table");
+    if (resultsContainer) {
+        resultsContainer.innerHTML = "";
+    }
+}
+
+
+
 
