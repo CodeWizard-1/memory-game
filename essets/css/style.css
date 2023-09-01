@@ -115,6 +115,10 @@ body {
   position: absolute;
   border-radius: 20px;
   background-color: #5e7bef;
+  background: -webkit-linear-gradient(to right, #f2fcfe, #1c92d2);
+  background: linear-gradient(to right, #f2fcfe, #1c92d2);
+  
+
   backface-visibility: hidden;
   box-shadow: 5px 5px 3px rgb(8, 16, 115);
 }
