@@ -155,7 +155,7 @@ function updateResultsTable() {
 
 function shuffleCards() {
     cards.forEach(card => {
-        // card.addEventListener("click", flipCard);
+        card.addEventListener("click", flipCard);
 
         const randomIndex = Math.floor(Math.random() * cards.length);
         card.style.order = randomIndex;
@@ -164,6 +164,6 @@ function shuffleCards() {
 
 shuffleCards();
 
-cards.forEach(card => {
-    card.addEventListener("click", flipCard);
-});
+// cards.forEach(card => {
+//     card.addEventListener("click", flipCard);
+// });
