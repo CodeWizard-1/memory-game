@@ -11,6 +11,25 @@ let timerInterval;
 
 const results = [];
 
+function openModal() {
+    const modal = document.getElementById("start-game-modal");
+    modal.style.display = "flex";
+}
+
+// Функция для закрытия модального окна
+function closeModal() {
+    const modal = document.getElementById("start-game-modal");
+    modal.style.display = "none";
+}
+
+window.onload = openModal;
+
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click", () => {
+    closeModal(); // Закрыть модальное окно
+    shuffleCards(); // Запустить игру
+});
+
 function startTimer() {
     if (!timerInterval) {
         startTime = new Date().getTime();
@@ -96,50 +115,57 @@ function showGameTime() {
     const seconds = Math.floor(elapsedTime / 1000) % 60;
     const minutes = Math.floor(elapsedTime / 1000 / 60);
 
+    const playerNameInput = document.getElementById("player-name").value;
+
+    if (!playerNameInput) {
+        alert("Пожалуйста, введите ваше имя.");
+        return; // Прервать выполнение, если имя не введено
+    }
+
     const gameTimeDisplay = document.createElement("div");
-    gameTimeDisplay.classList.add("game-time");
-    gameTimeDisplay.textContent = `Твое время: ${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
 
     document.body.appendChild(gameTimeDisplay);
 
-    const playerName = prompt("Inter your name:");
     const playerTime = `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
 
-    results.push({ name: playerName, time: playerTime });
+    results.push({ name: playerNameInput, time: playerTime });
 
     results.sort((a, b) => {
-    return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+        return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
     });
 
     updateResultsTable();
 }
 
+// Добавьте обработчик события для кнопки "Готово"
+const submitNameButton = document.getElementById("submit-name");
+submitNameButton.addEventListener("click", showGameTime);
+
+
 
 // document.body.appendChild(gameTimeDisplay);
 
 function updateResultsTable() {
-    const tableContainer = document.getElementById("results-table");
+    let tableContainer = document.getElementById("results-table");
     if (!tableContainer) {
-        // Create the table container if it doesn't exist
-        const newTableContainer = document.createElement("div");
-        newTableContainer.id = "results-table";
-
-        const table = document.createElement("table");
-        table.innerHTML = `
-            <thead>
-                <tr>
-                    <th>Имя</th>
-                    <th>Время</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        `;
-
-        newTableContainer.appendChild(table);
-        document.body.appendChild(newTableContainer);
+        // Создать контейнер таблицы, если его нет
+        tableContainer = document.createElement("div");
+        tableContainer.id = "results-table";
+        document.body.appendChild(tableContainer);
     }
 
-    const tableBody = tableContainer.querySelector("tbody");
+    const table = document.createElement("table");
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Время</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+
+    const tableBody = table.querySelector("tbody");
     tableBody.innerHTML = "";
 
     results.forEach((result, index) => {
@@ -150,7 +176,12 @@ function updateResultsTable() {
         `;
         tableBody.appendChild(row);
     });
+
+    // Заменить существующую таблицу обновленной таблицей
+    tableContainer.innerHTML = "";
+    tableContainer.appendChild(table);
 }
+
 
 
 function shuffleCards() {
@@ -160,10 +191,10 @@ function shuffleCards() {
         const randomIndex = Math.floor(Math.random() * cards.length);
         card.style.order = randomIndex;
     });
-}
 
+    // cards.forEach(card => {
+    //     card.addEventListener("click", flipCard);
+    // });
+}
 shuffleCards();
 
-// cards.forEach(card => {
-//     card.addEventListener("click", flipCard);
-// });

@@ -18,6 +18,24 @@
  
 }
 
+.modal {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  box-shadow: 5px 12px 20px 2px #000000;
+  z-index: 100;
+  background: url('../images/bubble-blue.svg') no-repeat center center/cover;
+  position: absolute;
+  overflow: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
 .header {
   margin: 10px auto;
   z-index: 99;
@@ -237,5 +255,9 @@ div .dot-iside {
   .memory-game {
     width: 260px;
     height: 260px;
+  }
+  .modal {
+    width: 250px;
+    height: 250px;
   }
 }
