@@ -154,6 +154,7 @@ const restartButton = document.getElementById("restart-button");
 
 restartButton.addEventListener("click", () => {
     resetGame();
+    hideResultsModal(); 
 });
 
 function resetGame() {
@@ -183,4 +184,8 @@ function closeResults() {
     if (resultsContainer) {
         resultsContainer.innerHTML = "";
     }
+}
+function hideResultsModal() {
+    const resultsModal = document.getElementById("results-modal");
+    resultsModal.style.display = "none";
 }
