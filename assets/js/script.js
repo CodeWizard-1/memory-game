@@ -110,8 +110,16 @@ function showGameTime() {
 
     resultTime.textContent = formattedTime;
 
-    const resultsModal = document.getElementById("results-modal");
-    resultsModal.style.display = "flex";
+    // const resultsModal = document.getElementById("results-modal");
+    // resultsModal.style.display = "flex";
+    // gameFinished = true;
+
+    displayResultsModal();
+}
+
+function displayResultsModal() {
+        const resultsModal = document.getElementById("results-modal");
+        resultsModal.style.display = "flex";
 }
 
 function formatTime(milliseconds) {

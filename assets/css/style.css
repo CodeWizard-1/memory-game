@@ -43,7 +43,26 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 50%;
 }
+.modal2{
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 100;
+  background: url('../images/bubble-blue.svg') no-repeat center center/cover;
+  position: absolute;
+  overflow: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
 
+#results-modal {
+  display: none;
+}
 .header {
   margin: 10px auto;
   z-index: 99;
