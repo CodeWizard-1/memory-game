@@ -12,10 +12,11 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background: url('../images/background-dark-scuba-divers.webp') no-repeat center center/cover;
 }
 
 .wrapper {
-  background: url('../images/background-dark-scuba-divers.webp') no-repeat center center/cover;
+  /* background: url('../images/background-dark-scuba-divers.webp') no-repeat center center/cover; */
   width: 100%;
   height: 100vh;
   display: flex;
@@ -291,7 +292,7 @@ div .dot-iside {
 }
 @media screen and  (max-width: 576px) {
   .header h1 {
-    font-size: 170%;
+    font-size: 220%;
   }
 
   .memory-game {
