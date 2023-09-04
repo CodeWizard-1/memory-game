@@ -290,7 +290,27 @@ div .dot-iside {
     height: 510px;
   }
 }
+
 @media screen and  (max-width: 576px) {
+  /* .header h1 {
+    font-size: 220%;
+  } */
+
+  .memory-game {
+    width: 400px;
+    height: 400px;
+  }
+  .modal {
+    width: 400px;
+    height: 400px;
+  }
+  .modal2 {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media screen and  (max-width: 414px) {
   .header h1 {
     font-size: 220%;
   }
@@ -308,3 +328,4 @@ div .dot-iside {
     height: 250px;
   }
 }
+
