@@ -168,16 +168,27 @@ body {
     transition: all 0.5s;
     cursor: pointer;
     margin: 10px auto;
-    /* box-shadow: 5px 5px 3px rgb(8, 16, 115); */
   }
 
   #start-button:hover {
     background-color:  #7b38d8;
   }
 
-.modal h2 {
+/* .modal h2 {
 
+} */
 
+#you-won {
+  font-size: 300%;
+  color:  #7b38d8;
+}
+
+.modal-content2 {
+  margin: -12px 25px 0;
+}
+
+#result-player-name, #result-time {
+  color: rgb(8, 16, 115);
 }
 
 #player-name {
