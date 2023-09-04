@@ -150,7 +150,7 @@ body {
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 30px auto;
+  margin: 10px auto;
   }
 
   #restart-button:hover {
@@ -299,6 +299,10 @@ div .dot-iside {
     height: 260px;
   }
   .modal {
+    width: 250px;
+    height: 250px;
+  }
+  .modal2 {
     width: 250px;
     height: 250px;
   }
