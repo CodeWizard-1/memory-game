@@ -8,11 +8,14 @@
   font-family: 'Cherry Bomb One', cursive;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  /* background: url('../images/background-dark-scuba-divers.webp') no-repeat center center/cover; */
+  overflow: hidden;
+  background-color: black;
+  height: 100%;
+  width: 100%;
 }
 
 .wrapper {
@@ -25,7 +28,7 @@ body {
   padding: 0;
   margin: 0;
 }
- 
+
 
 .modal {
   width: 500px;
@@ -44,7 +47,7 @@ body {
   border-radius: 50%;
 }
 
-.modal2{
+.modal2 {
   width: 500px;
   height: 500px;
   display: flex;
@@ -150,44 +153,41 @@ body {
   cursor: pointer;
   margin: 10px auto;
   box-shadow: 5px 5px 3px rgb(8, 16, 115);
-  }
+}
 
-  #restart-button:hover {
-    background-color: green;
-  }
+#restart-button:hover {
+  background-color: green;
+}
 
-  #start-button {
-    background-color: green;
-    border-radius: 10px;
-    border: 4px double #cccccc;
-    color: #eeeeee;
-    text-align: center;
-    font-size: 28px;
-    padding: 0px;
-    width: 200px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 10px auto;
-  }
+#start-button {
+  background-color: green;
+  border-radius: 10px;
+  border: 4px double #cccccc;
+  color: #eeeeee;
+  text-align: center;
+  font-size: 28px;
+  padding: 0px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 10px auto;
+}
 
-  #start-button:hover {
-    background-color:  #7b38d8;
-  }
-
-/* .modal h2 {
-
-} */
+#start-button:hover {
+  background-color: #7b38d8;
+}
 
 #you-won {
   font-size: 300%;
-  color:  #7b38d8;
+  color: #7b38d8;
 }
 
 .modal-content2 {
   margin: -12px 25px 0;
 }
 
-#result-player-name, #result-time {
+#result-player-name,
+#result-time {
   color: rgb(8, 16, 115);
 }
 
@@ -320,7 +320,7 @@ div .dot-iside {
   }
 }
 
-@media screen and  (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .header h1 {
     font-size: 270%;
   }
@@ -331,7 +331,7 @@ div .dot-iside {
   }
 }
 
-@media screen and  (max-width: 576px) {
+@media screen and (max-width: 576px) {
   /* .header h1 {
     font-size: 220%;
   } */
@@ -340,17 +340,19 @@ div .dot-iside {
     width: 400px;
     height: 400px;
   }
+
   .modal {
     width: 400px;
     height: 400px;
   }
+
   .modal2 {
     width: 400px;
     height: 400px;
   }
 }
 
-@media screen and  (max-width: 414px) {
+@media screen and (max-width: 414px) {
   .header h1 {
     font-size: 220%;
   }
@@ -359,13 +361,14 @@ div .dot-iside {
     width: 260px;
     height: 260px;
   }
+
   .modal {
     width: 250px;
     height: 250px;
   }
+
   .modal2 {
     width: 250px;
     height: 250px;
   }
 }
-

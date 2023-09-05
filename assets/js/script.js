@@ -35,6 +35,7 @@ function startTimer() {
         timerInterval = setInterval(updateTimer, 10);
     }
 }
+
 function stopTimer() {
     clearInterval(timerInterval);
 }
@@ -110,10 +111,6 @@ function showGameTime() {
 
     resultTime.textContent = formattedTime;
 
-    // const resultsModal = document.getElementById("results-modal");
-    // resultsModal.style.display = "flex";
-    // gameFinished = true;
-
     displayResultsModal();
 }
 
@@ -121,6 +118,7 @@ function displayResultsModal() {
         const resultsModal = document.getElementById("results-modal");
         resultsModal.style.display = "flex";
 }
+
 
 function formatTime(milliseconds) {
     const seconds = Math.floor(milliseconds / 1000) % 60;
