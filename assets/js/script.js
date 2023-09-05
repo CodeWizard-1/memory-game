@@ -176,9 +176,11 @@ function displayResultsModal() {
 function formatTime(milliseconds) {
     const seconds = Math.floor(milliseconds / 1000) % 60;
     const minutes = Math.floor(milliseconds / (1000 * 60));
+    const millisecondsPart = milliseconds % 1000;
     const formattedSeconds = seconds.toString().padStart(2, "0");
     const formattedMinutes = minutes.toString().padStart(2, "0");
-    return `${formattedMinutes}:${formattedSeconds}`;
+    const formattedMilliseconds = millisecondsPart.toString().padStart(3, "0");
+    return `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
 }
 
 
@@ -218,7 +220,6 @@ function resetGame() {
 
     localStorage.removeItem("memoryGameResults");
 
-    // Обновление модального окна с лучшими результатами
     displayResultsModal();
 }
 
