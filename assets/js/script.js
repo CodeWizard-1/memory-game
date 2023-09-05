@@ -24,7 +24,7 @@ function closeModal() {
 
     if (playerNameInput.value.trim() !== "") {
         modal.style.display = "none";
-        startButton.disabled = true; 
+        startButton.disabled = true;
         shuffleCards();
     }
 }
@@ -152,24 +152,24 @@ function updateRating(playerName, time) {
 
 
 function displayResultsModal() {
-        const resultsModal = document.getElementById("results-modal");
-        resultsModal.style.display = "flex";
+    const resultsModal = document.getElementById("results-modal");
+    resultsModal.style.display = "flex";
 
-        const bestResultsTable = document.getElementById("best-results-table");
-        bestResultsTable.innerHTML = "";
+    const bestResultsTable = document.getElementById("best-results-table");
+    bestResultsTable.innerHTML = "";
 
-        const storedResults = JSON.parse(localStorage.getItem("memoryGameResults")) || [];
+    const storedResults = JSON.parse(localStorage.getItem("memoryGameResults")) || [];
 
-        for (let i = 0; i < storedResults.length; i++) {
-            const result = storedResults[i];
-            const row = document.createElement("tr");
-                row.innerHTML = `
+    for (let i = 0; i < storedResults.length; i++) {
+        const result = storedResults[i];
+        const row = document.createElement("tr");
+        row.innerHTML = `
                     <td>${i + 1}</td>
                     <td>${result.playerName}</td>
                     <td>${formatTime(result.time)}</td>
                 `;
-                bestResultsTable.appendChild(row);
-            }
+        bestResultsTable.appendChild(row);
+    }
 }
 
 
@@ -205,7 +205,7 @@ const restartButton = document.getElementById("restart-button");
 
 restartButton.addEventListener("click", () => {
     resetGame();
-    hideResultsModal(); 
+    hideResultsModal();
 });
 
 function resetGame() {
@@ -218,7 +218,7 @@ function resetGame() {
 
     localStorage.removeItem("memoryGameResults");
 
-            // Обновление модального окна с лучшими результатами
+    // Обновление модального окна с лучшими результатами
     displayResultsModal();
 }
 

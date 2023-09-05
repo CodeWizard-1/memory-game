@@ -18,6 +18,13 @@ body {
   width: 100%;
 }
 
+/* #you-won,
+#result-player-name,
+#result-time,
+#rating-text {
+    display: none;
+} */
+
 .wrapper {
   background: url('../images/background-dark-scuba-divers.webp') no-repeat center center/cover;
   width: 100%;
