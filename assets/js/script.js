@@ -19,21 +19,12 @@ function openModal() {
     modal.style.display = "flex";
 }
 
-// function closeModal() {
-//     const modal = document.getElementById("start-game-modal");
-//     modal.style.display = "none";
-  
-//     if (playerNameInput.value.trim() !== "" && !startButton.hasAttribute("disabled")) {
-//         shuffleCards();
-//     }
-// }
-
 function closeModal() {
     const modal = document.getElementById("start-game-modal");
 
     if (playerNameInput.value.trim() !== "") {
         modal.style.display = "none";
-        startButton.disabled = true; // Делаем кнопку старта неактивной после начала игры
+        startButton.disabled = true; 
         shuffleCards();
     }
 }
@@ -139,13 +130,46 @@ function showGameTime() {
     const formattedTime = formatTime(elapsedTime);
 
     resultTime.textContent = formattedTime;
+    updateRating(playerName, elapsedTime);
 
     displayResultsModal();
 }
 
+function updateRating(playerName, time) {
+    const result = {
+        playerName,
+        time,
+    };
+
+    results.push(result);
+    results.sort((a, b) => a.time - b.time);
+    if (results.length > 5) {
+        results.pop();
+    }
+
+    localStorage.setItem("memoryGameResults", JSON.stringify(results));
+}
+
+
 function displayResultsModal() {
         const resultsModal = document.getElementById("results-modal");
         resultsModal.style.display = "flex";
+
+        const bestResultsTable = document.getElementById("best-results-table");
+        bestResultsTable.innerHTML = "";
+
+        const storedResults = JSON.parse(localStorage.getItem("memoryGameResults")) || [];
+
+        for (let i = 0; i < storedResults.length; i++) {
+            const result = storedResults[i];
+            const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td>${result.playerName}</td>
+                    <td>${formatTime(result.time)}</td>
+                `;
+                bestResultsTable.appendChild(row);
+            }
 }
 
 
@@ -191,6 +215,11 @@ function resetGame() {
     resetCards();
     shuffleCards();
     openModal();
+
+    localStorage.removeItem("memoryGameResults");
+
+            // Обновление модального окна с лучшими результатами
+    displayResultsModal();
 }
 
 function resetTimer() {
@@ -207,7 +236,7 @@ function resetCards() {
 }
 
 function closeResults() {
-    const resultsContainer = document.getElementById("results-table");
+    const resultsContainer = document.getElementById("best-results-table");
     if (resultsContainer) {
         resultsContainer.innerHTML = "";
     }

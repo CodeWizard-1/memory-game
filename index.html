@@ -93,10 +93,10 @@
                 <h2>Enter your name</h2>
                 <input type="text" id="player-name" placeholder="Player name">
                 <br>
-                <button id="start-button">START</button>
+                <button id="start-button" disabled>START</button>
             </div>
         </div>
-        <div id="results-modal" class="modal2">
+        <!-- <div id="results-modal" class="modal2">
             <form class="modal-content2">
                 <h2 id="you-won">You won!</h2>
                 <h2>Player name: <span id="result-player-name"></span></h2>
@@ -104,6 +104,27 @@
                 <h2>Your Rating: <span id="rating-text"></span></h2>
             </form>
             <div id="results-table"></div>
+        </div> -->
+        <div id="results-modal" class="modal2">
+            <div class="modal-content2">
+                <h2>Game Results</h2>
+                <p>Your Results:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="best-results-table">
+                    </tbody>
+                </table>
+                <h2 id="you-won">You won!</h2>
+                <h2>Player name: <span id="result-player-name"></span></h2>
+                <h2>Your time: <span id="result-time"></span></h2>
+                <h2>Your Rating: <span id="rating-text"></span></h2>
+            </div>
         </div>
 
         <button id="restart-button">NEW GAME</button>
