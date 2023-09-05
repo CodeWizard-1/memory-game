@@ -1,5 +1,8 @@
 const cards = document.querySelectorAll(".memory-card");
 const timerDisplay = document.getElementById("timer");
+const playerNameInput = document.getElementById("player-name");
+const startButton = document.getElementById("start-button");
+
 
 let hasFlippedCard = false;
 let boardLocked = false;
@@ -16,17 +19,43 @@ function openModal() {
     modal.style.display = "flex";
 }
 
+// function closeModal() {
+//     const modal = document.getElementById("start-game-modal");
+//     modal.style.display = "none";
+  
+//     if (playerNameInput.value.trim() !== "" && !startButton.hasAttribute("disabled")) {
+//         shuffleCards();
+//     }
+// }
+
 function closeModal() {
     const modal = document.getElementById("start-game-modal");
-    modal.style.display = "none";
+
+    if (playerNameInput.value.trim() !== "") {
+        modal.style.display = "none";
+        startButton.disabled = true; // Делаем кнопку старта неактивной после начала игры
+        shuffleCards();
+    }
 }
+
+
+function validatePlayerName() {
+    if (playerNameInput.value.trim() !== "") {
+        startButton.removeAttribute("disabled");
+    } else {
+        startButton.setAttribute("disabled", "disabled");
+    }
+}
+
+playerNameInput.addEventListener("input", validatePlayerName);
 
 window.onload = openModal;
 
-const startButton = document.getElementById("start-button");
 startButton.addEventListener("click", () => {
-    closeModal();
-    shuffleCards();
+    if (playerNameInput.value.trim() !== "") {
+        closeModal();
+        shuffleCards();
+    }
 });
 
 function startTimer() {
