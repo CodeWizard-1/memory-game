@@ -18,12 +18,11 @@ body {
   width: 100%;
 }
 
-/* #you-won,
 #result-player-name,
 #result-time,
 #rating-text {
     display: none;
-} */
+}
 
 .wrapper {
   background: url('../images/background-dark-scuba-divers.webp') no-repeat center center/cover;
@@ -184,18 +183,18 @@ body {
   background-color: #7b38d8;
 }
 
-#you-won {
-  font-size: 300%;
-  color: #7b38d8;
-}
 
 .modal-content2 {
-  margin: -12px 25px 0;
+  margin: -125px 25px 0;
 }
 
 #result-player-name,
 #result-time {
   color: rgb(8, 16, 115);
+}
+
+.modal-content2 th {
+  margin: 0 20px;
 }
 
 #player-name {
